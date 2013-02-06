@@ -1,5 +1,5 @@
 default: test lint build
-build:
+build: lib/sinon-qunit.js
 	./build
 test: lib/sinon-qunit.js
 	jstestdriver --tests all --reset
