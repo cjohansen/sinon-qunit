@@ -3,13 +3,13 @@
 testCase("SinonQUnitTest", {
     setUp: function () {
         sinon.spy(QUnit, "ok");
-		sinon.stub(sinon.sandbox, "create");
+        sinon.stub(sinon.sandbox, "create");
     },
 
     tearDown: function () {
-		if (sinon.sandbox.create.restore) {
-			sinon.sandbox.create.restore();
-		}
+        if (sinon.sandbox.create.restore) {
+            sinon.sandbox.create.restore();
+        }
 
         QUnit.originalTest.callCount = 0;
         QUnit.originalTest.args = [];
@@ -62,27 +62,27 @@ testCase("SinonQUnitTest", {
 
         assert(QUnit.originalTest.calledWith("Test This", 42, sinon.match.func, true));
     },
-	
-	"Callback registered against QUnit.testStart should create a sinon sandbox with the expected `injectInto` property": function () {
-		var createSandbox = QUnit.testStart.firstCall.args[0];
-		QUnit.config.current.testEnvironment = {};
 
-		createSandbox();
+    "Callback registered against QUnit.testStart should create a sinon sandbox with the expected `injectInto` property": function () {
+        var createSandbox = QUnit.testStart.firstCall.args[0];
+        QUnit.config.current.testEnvironment = {};
 
-		assert(sinon.sandbox.create.calledWithMatch({
-			injectInto: QUnit.config.current.testEnvironment
-		}));
-	},
+        createSandbox();
 
-	"Global setTimeout() is restored when the sandbox is created if `sinon.config.useFakeTimers` to ensure QUnit can still run": function ()
-	{
-		var createSandbox = QUnit.testStart.firstCall.args[0];
-		sinon.config.useFakeTimers = true;
+        assert(sinon.sandbox.create.calledWithMatch({
+            injectInto: QUnit.config.current.testEnvironment
+        }));
+    },
 
-		// Sinon will stub setTimeout, but QUnit needs it to work!
-		window.setTimeout = function () {};
-		createSandbox();
+    "Global setTimeout() is restored when the sandbox is created if `sinon.config.useFakeTimers` to ensure QUnit can still run": function ()
+    {
+        var createSandbox = QUnit.testStart.firstCall.args[0];
+        sinon.config.useFakeTimers = true;
 
-		assert(window.setTimeout === sinon.timers.setTimeout);
-	}
+        // Sinon will stub setTimeout, but QUnit needs it to work!
+        window.setTimeout = function () {};
+        createSandbox();
+
+        assert(window.setTimeout === sinon.timers.setTimeout);
+    }
 });
