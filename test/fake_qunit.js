@@ -2,8 +2,13 @@
 var QUnit = {
     ok: function () {},
     test: sinon.spy(),
-    testStart: sinon.spy(),
-    testDone: sinon.spy()
+	module: sinon.spy(),
+    testStart: sinon.stub(),
+    testDone: sinon.stub(),
+	config: {
+		current: {}
+	}
 };
 
 QUnit.originalTest = QUnit.test;
+QUnit.originalSetTimeout = window.setTimeout;
