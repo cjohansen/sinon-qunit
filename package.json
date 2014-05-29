@@ -1,7 +1,7 @@
 { 
     "name": "sinon-qunit",
     "description": "QUnit adapter for Sinon.JS: JavaScript test spies, stubs and mocks.",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "homepage": "http://cjohansen.no/sinon/sinon-qunit/",
     "author": "Christian Johansen",
     "repository": { 
